@@ -14,8 +14,9 @@ export default function SignIn() {
   function Login() {
     let email = emailRef.current.value;
     let password = passRef.current.value;
-    if (email == emailRegex && password == passwordRegex) {
+    if (emailRegex.test(email) && passwordRegex.test(password)) {
       alert("you will be redirected to Dashboard");
+      return;
     } else alert("wrong Credentials");
   }
 
