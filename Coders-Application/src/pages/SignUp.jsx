@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import coding from "../assets/coding.png";
 import { useNavigate, NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 export default function SignUp() {
-  const nameRef = useRef();
-  const lastNameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const passwordRegex =
@@ -14,26 +16,17 @@ export default function SignUp() {
 
   let navigate = useNavigate();
 
-  function handleSignUp() {
-    const name = nameRef.current.value.trim();
-    const lastName = lastNameRef.current.value.trim();
-    const email = emailRef.current.value.trim();
-    const password = passwordRef.current.value.trim();
+  const onSubmit = (data) => {
+    const { name, lastName, email, password } = data;
 
-    if (!name || !lastName) {
-      alert("name and lastname cannot be empty.");
-      return;
-    }
-    if (!email || !password) {
-      alert("email and password cannot be empty.");
-      return;
-    }
     if (!emailRegex.test(email) || !passwordRegex.test(password)) {
       alert("Please enter a valid email and strong password.");
       return;
     }
+
+    alert("Registration successful! Redirecting to Sign In...");
     navigate("/signin");
-  }
+  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
@@ -49,40 +42,63 @@ export default function SignUp() {
           <h3 className="text-[#8053ff] text-center text-lg font-semibold mb-4">
             Join Coders Now!
           </h3>
-          <input
-            type="text"
-            placeholder="Name"
-            id="name"
-            ref={nameRef}
-            className="mb-3 p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            id="lastname"
-            ref={lastNameRef}
-            className="mb-3 p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            id="email"
-            ref={emailRef}
-            className="mb-3 p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            id="password"
-            ref={passwordRef}
-            className="mb-3 p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
-          />
-          <button
-            onClick={handleSignUp}
-            className="bg-[rgb(47,61,255)] text-white py-2 rounded-md hover:opacity-90 transition mb-3"
-          >
-            Sign Up
-          </button>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+            <div>
+              <input
+                type="text"
+                placeholder="Name"
+                className="w-full p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
+              />
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Last Name"
+                className="w-full p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
+              />
+              {errors.lastName && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.lastName.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
+              />
+              {errors.email && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.email.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <input
+                type="password"
+                placeholder="Password"
+                className="w-full p-2 rounded-full text-sm text-[#d9d5d5] placeholder:bg-[#23155b] placeholder:p-2"
+              />
+              {errors.password && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+            <button
+              type="submit"
+              className="bg-[rgb(47,61,255)] text-white py-2 rounded-md hover:opacity-90 transition mb-3 w-full"
+            >
+              Sign Up
+            </button>
+          </form>
+
           <div className="text-center text-sm">
             <p>
               Already have an account?{" "}
