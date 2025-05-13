@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import coding from "../assets/coding.png";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function SignIn() {
