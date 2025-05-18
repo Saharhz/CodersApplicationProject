@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
-import ReactSwitch from "react-switch";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../redux/store/authSlice";
+import { useNavigate } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/signin");
+  };
   return (
     <nav
       className="p-2 text-sm flex justify-between flex-nowrap gap-3 text-gray-800 dark:text-white bg-[#E5E7EB] dark:bg-[#23155B] ${
@@ -38,7 +47,10 @@ export default function Navbar() {
                 <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">
                   Profile
                 </li>
-                <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">
+                <li
+                  onClick={handleLogout}
+                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                >
                   Logout
                 </li>
               </ul>
