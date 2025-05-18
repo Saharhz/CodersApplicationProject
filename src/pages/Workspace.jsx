@@ -5,8 +5,9 @@ import Playground from "../components/Playground";
 
 export default function WorkSpaceSlice() {
   return (
-    <div>
+    <div className="h-screen w-screen">
       <Split
+        className="flex h-full"
         sizes={[50, 50]}
         minSize={200}
         gutterSize={10}
@@ -20,10 +21,10 @@ export default function WorkSpaceSlice() {
           return gutter;
         }}
       >
-        <div>
+        <div className="p-4 overflow-auto">
           <ChallengeDescription />
         </div>
-        <div>
+        <div className="p-4 overflow-auto">
           <Playground />
         </div>
       </Split>

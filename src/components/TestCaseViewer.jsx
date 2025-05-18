@@ -9,9 +9,10 @@ export default function TestCaseViewer() {
   const [selected, setselected] = useState(testCases[0]);
 
   return (
-    <div>
-      <h3>Test Cases</h3>
+    <div className="p-4">
+      <h3 className="text-lg font-semibold mb-2">Test Cases</h3>
       <select
+        className="mb-4 border p-2 w-full"
         onChange={(e) =>
           setselected(testCases.find((tc) => tc.id == e.target.value))
         }
@@ -22,11 +23,17 @@ export default function TestCaseViewer() {
           </option>
         ))}
       </select>
-      <div>
-        <strong>Expected Output</strong>
-        <pre>{selected.outputText}</pre>
+      <div className="mb-2">
+        <strong>Input:</strong>
+        <pre className="bg-gray-100 p-2 rounded">{selected.inputText}</pre>
       </div>
-      <button>Submit</button>
+      <div className="mb-2">
+        <strong>Expected Output</strong>
+        <pre className="bg-gray-100 p-2 rounded">{selected.outputText}</pre>
+      </div>
+      <button className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Submit
+      </button>
     </div>
   );
 }

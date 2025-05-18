@@ -7,6 +7,7 @@ import Leaderboard from "./pages/Leaderboard";
 import Navbar from "./components/Navbar";
 import Profile from "./pages/Profile";
 import Workspace from "./pages/Workspace";
+import Challenges from "./pages/Challenges";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/Leaderboard" element={<Leaderboard />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Workspace" element={<Workspace />} />
+        <Route path="/Challenges" element={<Challenges />} />
       </Routes>
     </>
   );

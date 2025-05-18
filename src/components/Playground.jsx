@@ -12,8 +12,8 @@ export default function Playground() {
   const { language, fontSize } = useSelector((state) => state.workspace);
 
   return (
-    <div>
-      <div>
+    <div className="h-full w-full flex flex-col">
+      <div className="p-2 bg-gray-100 flex gap-4">
         <DropDown
           label="Language"
           options={["javascript", "python"]}
@@ -26,8 +26,8 @@ export default function Playground() {
           value={fontSize}
           onChange={(val) => dispatch(setFontSize(Number(val)))}
         />
-        <Split>
-          <div>
+        <Split className="flex-1 flex flex-col">
+          <div className="overflow-auto bg-white">
             <TestCaseViewer />
           </div>
         </Split>
