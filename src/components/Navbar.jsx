@@ -2,23 +2,25 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.svg";
 import ReactSwitch from "react-switch";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
   return (
-    <nav className="p-2 text-sm flex flex-nowrap gap-3 text-[#E5E7EB] bg-[#E5E7EB] dark:bg-[#23155B] ">
-      <div>
+    <nav
+      className="p-2 text-sm flex justify-between flex-nowrap gap-3 text-gray-800 dark:text-white bg-[#E5E7EB] dark:bg-[#23155B] ${
+        theme === 'dark' ? 'bg-[#23155B] text-white' : 'bg-[#E5E7EB] text-gray-800'
+      }`"
+    >
+      <div className="flex justify-between item-center gap-4">
         <img src={logo} alt="logo" className="size-6" />
         <h3>CodeCLA</h3>
         <NavLink to="/Challenges">Challenges</NavLink>
         <NavLink to="/Leaderboard">Leaderboard</NavLink>
       </div>
 
-      <div className="flex items-center gap-6">
-        <button className=" text-[#E5E7EB] dark:bg-[#23155B]">🌓</button>
-      </div>
       <div className="relative">
         <div
           onClick={toggleDropdown}
@@ -36,9 +38,6 @@ export default function Navbar() {
                 <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">
                   Profile
                 </li>
-                {/* <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">
-                  Settings
-                </li> */}
                 <li className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer">
                   Logout
                 </li>
@@ -46,6 +45,7 @@ export default function Navbar() {
             </div>
           )}
         </div>
+        <ThemeToggle />
       </div>
     </nav>
   );

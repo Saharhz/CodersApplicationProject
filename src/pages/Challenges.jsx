@@ -2,6 +2,7 @@ import React from "react";
 import CategoriesList from "../components/CategoriesList";
 import ChallengesList from "../components/ChallengesList";
 import TrendingCategoriesBox from "../components/TrendingCategoriesBox";
+import TopKCodersList from "../components/TopKCodersList";
 
 export default function Challenges() {
   return (
@@ -12,8 +13,9 @@ export default function Challenges() {
           <CategoriesList />
           <ChallengesList />
         </div>
-        <div className="w-[250px] shrink-0">
+        <div className="w-[250px] shrink-0 space-y-6">
           <TrendingCategoriesBox />
+          <TopKCodersList />
         </div>
       </div>
     </div>
