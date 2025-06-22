@@ -24,12 +24,14 @@ export const registerCoder = async (req, res) => {
       password: hashedPassword,
       role,
       description,
+      isVerified: false,
     });
 
     await newUser.save();
 
     res.status(201).json({ message: "Coder registered", user: newUser });
   } catch (err) {
+    console.error("❌ Registration Error:", err.message);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -46,7 +48,7 @@ export const registerManager = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
-      first_name,
+      name: `${first_name} ${last_name}`,
       last_name,
       email,
       password: hashedPassword,

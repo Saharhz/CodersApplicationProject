@@ -6,6 +6,8 @@ import challengeRoutes from "./routers/challenge.routers.js";
 import submissionRoutes from "./routers/submission.routers.js";
 import leaderboardRoutes from "./routers/leaderboard.routers.js";
 import statsRoutes from "./routers/stats.routers.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
